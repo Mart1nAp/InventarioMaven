@@ -1,5 +1,7 @@
 package com.alura.controller;
 
+import com.alura.factory.ConnectionFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +19,7 @@ public class ProductoController {
 	}
 
 	public List<Map<String,String>> listar() throws SQLException {
-		// TODO
-		Connection con = DriverManager
-				.getConnection("jdbc:mysql://localhost:3309/control_de_stock?useTimezone=true&serverTimezone=UTC",
-						"root",
-						"admin");
+		Connection con = new ConnectionFactory().recuperaConexion();
 
 		Statement statement = con.createStatement();
 		statement.execute("SELECT ID,NOMBRE,DESCRIPCION,CANTIDAD FROM PRODUCTO");
